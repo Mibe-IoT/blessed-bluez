@@ -274,7 +274,7 @@ public class BluetoothCentralManager {
      */
     public void scanForPeripherals() {
         // Stop the current scan if it is active
-        if (isScanning) stopScan();
+        if (isScanning) stopCurrentScan();
 
         // Start unfiltered BLE scan
         normalScanActive = true;
@@ -296,7 +296,7 @@ public class BluetoothCentralManager {
         }
 
         // Stop the current scan if it is active
-        if (isScanning) stopScan();
+        if (isScanning) stopCurrentScan();
 
         // Store serviceUUIDs to scan for and start scan
         resetScanFilters();
@@ -321,7 +321,7 @@ public class BluetoothCentralManager {
         }
 
         // Stop the current scan if it is active
-        if (isScanning) stopScan();
+        if (isScanning) stopCurrentScan();
 
         // Store peripheral names to scan for and start scan
         resetScanFilters();
@@ -344,7 +344,7 @@ public class BluetoothCentralManager {
         }
 
         // Stop the current scan if it is active
-        if (isScanning) stopScan();
+        if (isScanning) stopCurrentScan();
 
         // Store peripheral address to scan for and start scan
         resetScanFilters();
@@ -356,9 +356,15 @@ public class BluetoothCentralManager {
     /**
      * Stop scanning for peripherals.
      */
-    public void stopScan() {
+    public void stopCurrentScan() {
         normalScanActive = false;
         stopScanning();
+    }
+
+    public void stopScan() {
+        normalScanActive = false;
+        commandQueue.clear();
+        stopCurrentScan();
     }
 
     /**

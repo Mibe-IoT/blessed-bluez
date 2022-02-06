@@ -157,7 +157,7 @@ class BluetoothCentralManagerTest {
         BluetoothCentralManager central = startUnfilteredScan();
 
         // When
-        central.stopScan();
+        central.stopCurrentScan();
 
         // Then
         verify(bluezAdapter, timeout(TIMEOUT_THRESHOLD)).stopDiscovery();
