@@ -1,33 +1,28 @@
-plugins {
-    id 'java'
+allprojects {
+    version = "0.62"
+    group = "com.github.mibe-iot.ble"
 }
 
-group 'com.welie'
-version '0.2-App'
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'maven-publish'
 
-compileJava {
-    sourceCompatibility = '1.8'
-    targetCompatibility = '1.8'
-}
+    sourceCompatibility = 1.8 // java 8
+    targetCompatibility = 1.8
 
-repositories {
-    mavenCentral()
-}
-
-jar {
-    duplicatesStrategy = DuplicatesStrategy.INCLUDE
-    manifest {
-        attributes 'Main-Class': 'testapp.Main'
+    java {
+        withSourcesJar()
+        withJavadocJar()
     }
-    from {
-        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
-    }
-}
 
-dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'org.jetbrains:annotations:22.0.0'
-    implementation 'ch.qos.logback:logback-core:1.2.10'
-    implementation 'ch.qos.logback:logback-classic:1.2.10'
-    implementation project(':blessed')
+    publishing {
+        publications {
+            maven(MavenPublication) {
+                groupId project.group
+                artifactId project.name
+                version project.version
+                from components.java
+            }
+        }
+    }
 }
