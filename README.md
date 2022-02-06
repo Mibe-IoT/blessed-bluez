@@ -1,4 +1,4 @@
-# BLESSED for Bluez - BLE made easy
+# BLESSED for Bluez - Mibe
 
 [![](https://jitpack.io/v/weliem/blessed-bluez.svg)](https://jitpack.io/#weliem/blessed-bluez)
 [![Downloads](https://jitpack.io/v/weliem/blessed-bluez/month.svg)](https://jitpack.io/#weliem/blessed-bluez)
