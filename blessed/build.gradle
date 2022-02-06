@@ -1,9 +1,33 @@
 plugins {
-    id 'jacoco'
+    id "jacoco"
+    id "java"
+    id "maven-publish"
 }
+
+version = "0.62"
+group = "com.github.mibe-iot.ble"
 
 repositories {
     mavenCentral()
+}
+
+sourceCompatibility = 1.8 // java 8
+targetCompatibility = 1.8
+
+java {
+    withSourcesJar()
+    withJavadocJar()
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            groupId project.group
+            artifactId project.name
+            version project.version
+            from components.java
+        }
+    }
 }
 
 test {
